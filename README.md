@@ -1,6 +1,59 @@
 # 🔍 PortScanner Android
 
-Aplicativo Android educacional para varredura de portas TCP em redes locais ou remotas.
+<div align="center">
+
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84?style=for-the-badge&logo=android-studio&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
+
+<br/>
+
+> **Ferramenta educacional de varredura de portas TCP para Android**  
+> Desenvolvida para aprendizado em redes, sockets e segurança da informação.
+
+</div>
+
+---
+
+## 📋 Sobre o Projeto
+
+O **PortScanner** é um aplicativo Android desenvolvido em **Java** que permite realizar varredura de portas TCP em qualquer host de rede. O usuário informa um endereço IP ou domínio e um intervalo de portas, e o app verifica quais estão abertas — identificando automaticamente o serviço correspondente.
+
+O projeto foi criado com fins **educacionais**, demonstrando na prática conceitos fundamentais de:
+
+- 🌐 Comunicação em redes TCP/IP
+- 🔌 Java Sockets (`java.net.Socket`)
+- 🧵 Programação concorrente no Android
+- 📱 Desenvolvimento de interfaces com XML
+
+---
+
+## ✨ Funcionalidades
+
+| Recurso | Descrição |
+|---|---|
+| 🔍 **Varredura TCP** | Verifica portas no intervalo de 1 a 65535 |
+| 🏷️ **Identificação de Serviços** | Reconhece 35+ serviços conhecidos (HTTP, SSH, FTP, MySQL...) |
+| 📊 **Progresso em Tempo Real** | Barra de progresso + contador de portas verificadas |
+| ⛔ **Cancelamento** | Interrompe a varredura a qualquer momento |
+| 🌙 **Tema Dark** | Interface moderna inspirada no GitHub Dark |
+| ⚡ **Thread em Background** | Não trava a UI durante o scan |
+
+---
+
+## 🛠️ Tecnologias
+
+```
+📦 PortScanner
+├── ☕ Java 8
+├── 📱 Android SDK (minSdk 21 / targetSdk 34)
+├── 🔌 java.net.Socket — conexões TCP
+├── 🧵 Thread + Handler/Looper — background + UI thread
+├── 🎨 XML Layouts — interface declarativa
+└── 📦 Gradle — build system
+```
 
 ---
 
@@ -23,66 +76,96 @@ PortScanner/
 │           │   └── input_background.xml
 │           └── values/
 │               └── strings.xml
+├── gradle.properties
 ├── build.gradle
-├── settings.gradle
-└── README.md
+└── settings.gradle
 ```
 
 ---
 
-## ⚙️ Como importar no Android Studio
+## 🚀 Como Executar
 
-1. Abra o **Android Studio**
-2. Clique em **"Open"** (não em "New Project")
-3. Navegue até a pasta `PortScanner/` e selecione-a
-4. Aguarde a sincronização do Gradle
-5. Conecte um dispositivo ou inicie um emulador
-6. Clique em **▶ Run**
+### Pré-requisitos
+
+- [Android Studio](https://developer.android.com/studio) Hedgehog ou superior
+- JDK 8+
+- Android SDK API 21+
+- Emulador ou dispositivo Android
+
+### Passo a passo
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/miguelmoraesx/PortScanner.git
+
+# 2. Abra no Android Studio
+# File → Open → selecione a pasta PortScanner/
+
+# 3. Aguarde a sincronização do Gradle
+
+# 4. Execute o app
+# Clique em ▶ Run (Shift+F10)
+```
 
 ---
 
-## 🚀 Funcionalidades
+## 🧪 Hosts para Teste
 
-| Recurso | Descrição |
+> ⚠️ Use apenas em hosts com autorização explícita!
+
+| Host | Descrição |
 |---|---|
-| Scan de portas TCP | Verifica portas de 1 a 65535 |
-| Identificação de serviços | Reconhece 30+ serviços conhecidos |
-| Progresso em tempo real | Barra de progresso + status por porta |
-| Cancelamento | Botão para interromper o scan |
-| Tema dark | Interface inspirada no GitHub Dark |
-| Timeout configurável | 500ms por porta (editável no código) |
+| `scanme.nmap.org` | Host público do projeto Nmap — liberado para testes |
+| `127.0.0.1` | Localhost do emulador |
+| `10.0.2.2` | Máquina host do emulador Android |
+| IP da sua rede local | Com permissão do administrador |
 
 ---
 
-## 🧰 Tecnologias
+## 🏷️ Serviços Reconhecidos
 
-- **Java** — linguagem principal
-- **Android SDK** mínimo API 21 (Android 5.0+)
-- **java.net.Socket** — conexões TCP
-- **Thread + Handler** — execução em background sem travar a UI
-- **XML Layouts** — interface declarativa
+O app identifica automaticamente mais de **35 serviços conhecidos**, incluindo:
 
----
-
-## 🧪 Hosts de teste (com autorização)
-
-- `scanme.nmap.org` — host público do projeto Nmap para testes legais
-- `127.0.0.1` — localhost (emulador)
-- IPs da sua rede local (com permissão do administrador)
+```
+21   → FTP          22   → SSH          23   → Telnet
+25   → SMTP         53   → DNS          80   → HTTP
+110  → POP3         143  → IMAP         443  → HTTPS
+445  → SMB          513  → login/cmd    514  → Shell/Syslog
+3306 → MySQL        3389 → RDP          5432 → PostgreSQL
+5900 → VNC          6379 → Redis        8080 → HTTP Alt
+8888 → Jupyter      9200 → Elasticsearch
+27017→ MongoDB      ...e muito mais!
+```
 
 ---
 
 ## ⚠️ Aviso Legal
 
 > Este aplicativo é destinado **exclusivamente para fins educacionais**.  
-> Use apenas em redes e hosts para os quais você tem **autorização explícita**.  
-> A varredura não autorizada de portas pode ser ilegal em várias jurisdições.
+> Utilize apenas em redes e hosts para os quais você possui **autorização explícita**.  
+> A varredura não autorizada de portas pode ser **ilegal** em diversas jurisdições.  
+> O autor não se responsabiliza pelo uso indevido desta ferramenta.
 
 ---
 
-## 📖 Conceitos abordados
+## 📚 Conceitos Abordados
 
-- **Sockets TCP** — como funciona uma conexão de rede
+- **Sockets TCP** — como funciona uma conexão de rede em baixo nível
 - **Threading no Android** — por que operações de rede não podem rodar na UI thread
-- **Handler/Looper** — comunicação entre threads no Android
-- **Port scanning** — como ferramentas como nmap identificam serviços
+- **Handler/Looper** — comunicação segura entre threads no Android
+- **Port Scanning** — como ferramentas como nmap identificam serviços ativos
+- **Timeout de conexão** — estratégias para varredura eficiente
+
+---
+
+## 👨‍💻 Autor
+
+<div align="center">
+
+Desenvolvido com 💙 para fins educacionais
+
+[![GitHub](https://img.shields.io/badge/GitHub-miguelmoraesx-181717?style=for-the-badge&logo=github)](https://github.com/miguelmoraesx)
+
+⭐ Se este projeto te ajudou, deixa uma estrela no repositório!
+
+</div>
