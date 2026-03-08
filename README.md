@@ -162,7 +162,7 @@ O app identifica automaticamente mais de **35 serviços conhecidos**, incluindo:
 
 <div align="center">
 
-Desenvolvido com 💙 para fins educacionais
+Desenvolvido para fins educacionais
 
 [![GitHub](https://img.shields.io/badge/GitHub-miguelmoraesx-181717?style=for-the-badge&logo=github)](https://github.com/miguelmoraesx)
 
