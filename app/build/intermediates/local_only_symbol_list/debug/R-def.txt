@@ -1,0 +1,15 @@
+R_DEF: Internal format may change without notice
+local
+drawable card_background
+drawable input_background
+id btnClear
+id btnScan
+id etHost
+id etPortEnd
+id etPortStart
+id progressBar
+id scrollView
+id tvResults
+id tvStatus
+layout activity_main
+string app_name

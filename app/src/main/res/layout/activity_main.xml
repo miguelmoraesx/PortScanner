@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#0D1117">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔍 PortScanner"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#58A6FF"
+        android:gravity="center"
+        android:paddingBottom="2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Varredura educacional de portas TCP"
+        android:textSize="11sp"
+        android:textColor="#8B949E"
+        android:gravity="center"
+        android:paddingBottom="14dp" />
+
+    <!-- Card de Configuração -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="14dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HOST / IP"
+            android:textSize="10sp"
+            android:textColor="#8B949E"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/etHost"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:hint="ex: 192.168.1.1 ou scanme.nmap.org"
+            android:inputType="text"
+            android:textColor="#E6EDF3"
+            android:textColorHint="#484F58"
+            android:background="@drawable/input_background"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PORTA INICIAL"
+                    android:textSize="10sp"
+                    android:textColor="#8B949E"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/etPortStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:hint="1"
+                    android:inputType="number"
+                    android:textColor="#E6EDF3"
+                    android:textColorHint="#484F58"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PORTA FINAL"
+                    android:textSize="10sp"
+                    android:textColor="#8B949E"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/etPortEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:hint="1024"
+                    android:inputType="number"
+                    android:textColor="#E6EDF3"
+                    android:textColorHint="#484F58"
+                    android:background="@drawable/input_background"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:singleLine="true" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnScan"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_weight="2"
+                android:text="▶  Escanear"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#238636"
+                android:layout_marginEnd="8dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:text="Limpar"
+                android:textColor="#E6EDF3"
+                android:backgroundTint="#21262D" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aguardando varredura..."
+            android:textColor="#8B949E"
+            android:textSize="12sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="6dp"
+            android:visibility="gone"
+            android:progressTint="#58A6FF"
+            android:progressBackgroundTint="#21262D" />
+    </LinearLayout>
+
+    <!-- Cabeçalho da tabela -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:background="#161B22"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:text=""
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:text="PORTA"
+            android:textColor="#484F58"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="STATUS"
+            android:textColor="#484F58"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="SERVIÇO"
+            android:textColor="#484F58"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Resultados -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/card_background">
+
+        <TextView
+            android:id="@+id/tvResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#E6EDF3"
+            android:textSize="13sp"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="6dp" />
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚠ Use apenas em redes e dispositivos com autorização"
+        android:textSize="10sp"
+        android:textColor="#F0883E"
+        android:gravity="center"
+        android:paddingTop="6dp" />
+
+</LinearLayout>
