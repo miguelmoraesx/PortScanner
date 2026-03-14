@@ -4,7 +4,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 public class PortScanner {
 
     public interface ScanCallback {
@@ -72,23 +75,32 @@ public class PortScanner {
     }
 
     public void scan(ScanCallback callback, CancelChecker cancelChecker) {
-        int total    = portEnd - portStart + 1;
-        int checked  = 0;
-        int openCount = 0;
+        int total = portEnd - portStart + 1;
+        AtomicInteger checked = new AtomicInteger(0);
+        AtomicInteger openCount = new AtomicInteger(0);
+        ExecutorService executor = Executors.newFixedThreadPool(50); // 50 threads paralelas
 
         for (int port = portStart; port <= portEnd; port++) {
-            if (cancelChecker.isCancelled()) {
-                callback.onScanCancelled();
-                return;
-            }
-
-            boolean isOpen = isPortOpen(host, port, timeoutMs);
-            checked++;
-            if (isOpen) openCount++;
-            callback.onPortChecked(port, isOpen, checked, total);
+            if (cancelChecker.isCancelled()) break;
+            final int p = port;
+            executor.submit(() -> {
+                if (cancelChecker.isCancelled()) return;
+                boolean isOpen = isPortOpen(host, p, timeoutMs);
+                int c = checked.incrementAndGet();
+                if (isOpen) openCount.incrementAndGet();
+                callback.onPortChecked(p, isOpen, c, total);
+            });
         }
 
-        callback.onScanComplete(openCount);
+        executor.shutdown();
+        try {
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            executor.shutdownNow();
+        }
+
+        if (cancelChecker.isCancelled()) callback.onScanCancelled();
+        else callback.onScanComplete(openCount.get());
     }
 
     private boolean isPortOpen(String host, int port, int timeout) {
